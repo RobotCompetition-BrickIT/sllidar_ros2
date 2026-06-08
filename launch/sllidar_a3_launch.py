@@ -18,6 +18,8 @@ def generate_launch_description():
     inverted = LaunchConfiguration('inverted', default='false')
     angle_compensate = LaunchConfiguration('angle_compensate', default='true')
     scan_mode = LaunchConfiguration('scan_mode', default='Sensitivity')
+        namespace = LaunchConfiguration('namespace', default='')
+        use_namespace = LaunchConfiguration('use_namespace', default='false')
 
     return LaunchDescription([
 
@@ -60,6 +62,7 @@ def generate_launch_description():
             package='sllidar_ros2',
             executable='sllidar_node',
             name='sllidar_node',
+                namespace=namespace,
             parameters=[{'channel_type':channel_type,
                          'serial_port': serial_port, 
                          'serial_baudrate': serial_baudrate, 

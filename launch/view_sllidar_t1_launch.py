@@ -11,13 +11,15 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-    channel_type = LaunchConfiguration('channel_type', default='udp')
+    channel_type =  LaunchConfiguration('channel_type', default='udp')
     udp_ip = LaunchConfiguration('udp_ip', default='192.168.11.2')
     udp_port = LaunchConfiguration('udp_port', default='8089') 
     frame_id = LaunchConfiguration('frame_id', default='laser')
     inverted = LaunchConfiguration('inverted', default='false')
     angle_compensate = LaunchConfiguration('angle_compensate', default='true')
     scan_mode = LaunchConfiguration('scan_mode', default='Sensitivity')
+    namespace = LaunchConfiguration('namespace', default='')
+    use_namespace = LaunchConfiguration('use_namespace', default='false')
 
     rviz_config_dir = os.path.join(
             get_package_share_directory('sllidar_ros2'),
@@ -65,6 +67,7 @@ def generate_launch_description():
             package='sllidar_ros2',
             executable='sllidar_node',
             name='sllidar_node',
+            namespace=namespace,
             parameters=[{'channel_type': channel_type, 
                          'udp_ip': udp_ip,
                          'udp_port': udp_port,

@@ -19,6 +19,8 @@ def generate_launch_description():
     angle_compensate = LaunchConfiguration('angle_compensate', default='true')
     scan_mode = LaunchConfiguration('scan_mode', default='Sensitivity')
     scan_frequency = LaunchConfiguration('scan_frequency', default='10')
+    namespace = LaunchConfiguration('namespace', default='')
+    use_namespace = LaunchConfiguration('use_namespace', default='false')
     
     rviz_config_dir = os.path.join(
             get_package_share_directory('sllidar_ros2'),
@@ -66,6 +68,7 @@ def generate_launch_description():
             package='sllidar_ros2',
             executable='sllidar_node',
             name='sllidar_node',
+            namespace=namespace,
             parameters=[{'channel_type': channel_type, 
                          'udp_ip': udp_ip,
                          'udp_port': udp_port,
@@ -79,6 +82,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
+            namespace=namespace,
             arguments=['-d', rviz_config_dir],
             output='screen'),
     ])

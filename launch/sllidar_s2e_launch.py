@@ -19,6 +19,8 @@ def generate_launch_description():
     angle_compensate = LaunchConfiguration('angle_compensate', default='true')
     scan_mode = LaunchConfiguration('scan_mode', default='Sensitivity')
     scan_frequency = LaunchConfiguration('scan_frequency', default='10')
+    namespace = LaunchConfiguration('namespace', default='')
+    use_namespace = LaunchConfiguration('use_namespace', default='false')
 
     return LaunchDescription([
 
@@ -61,6 +63,7 @@ def generate_launch_description():
             package='sllidar_ros2',
             executable='sllidar_node',
             name='sllidar_node',
+            namespace=namespace,
             parameters=[{'channel_type': channel_type, 
                          'udp_ip': udp_ip,
                          'udp_port': udp_port,
